@@ -81,7 +81,7 @@ Configure GitHub Actions secrets on this new repository:
 
 Secrets on existing repositories do not automatically carry over. An organization-level secret must explicitly include the new repository if used instead.
 
-The workflow runs container smoke tests before publishing `linux/amd64` and `linux/arm64` images. It publishes on pushes to `main`, `v*` tags, manual runs, and weekly Sunday rebuilds at 08:23 UTC to refresh the nginx base. Tags include `latest`, `2026.9.30-1a`, and a commit SHA tag. Increment the app version in the footer and workflow when changing the website. Change tags if maintaining multiple release lines.
+The workflow runs container smoke tests before publishing `linux/amd64` and `linux/arm64` images. It publishes on pushes to `main`, `v*` tags, manual runs, and weekly Sunday rebuilds at 08:23 UTC to refresh the nginx base. Tags include `latest`, `2026.9.30-1b`, and a commit SHA tag. Increment the app version in the footer and workflow when changing the website. Change tags if maintaining multiple release lines.
 
 Before deployment, verify the first workflow passes and the image exists on Docker Hub. The workflow includes tests for nginx configuration, initial year creation, deep links, filenames with spaces and punctuation, live additions and deletions, uppercase extensions, and blocking nonimage files.
 
@@ -110,4 +110,4 @@ Reference snapshots:
 - https://web.archive.org/web/20250301000000/https://www.weevilcitycruisers.com/car-show-pictures-2023.html
 - https://web.archive.org/web/20250301000000/https://www.weevilcitycruisers.com/car-show-pictures-2024.html
 
-The recovered historical text and image reference manifests are in `research/` and excluded from the Docker image. The new classic car illustration is an original SVG, not a club photograph.
+The recovered historical text and image reference manifests are in `research/` and excluded from the Docker image. The header uses the club logo retrieved from its public Facebook page (668 × 720 pixels, the highest accessible resolution found). The Facebook logo says “Est. 1997”; the displayed founding year follows this current branding, while the recovered historical text above records the old website’s 1996 claim. The orange 1969 Mustang Mach 1 is a generated vector-style PNG illustration, not a club photograph or a true SVG. It is also used for empty-album covers.

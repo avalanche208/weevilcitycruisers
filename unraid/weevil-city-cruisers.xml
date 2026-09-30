@@ -8,7 +8,7 @@
 <Project>https://github.com/avalanche208/weevilcitycruisers</Project>
 <Overview>Lightweight nginx car club website. Place photos in /data/car_show_pictures/YYYY. New year folders appear automatically without rebuilding or restarting.</Overview>
 <Category>Web: Other:</Category><WebUI>http://[IP]:[PORT:80]/</WebUI>
-<Icon>https://raw.githubusercontent.com/avalanche208/weevilcitycruisers/main/site/assets/unraid-icon.png</Icon>
+<Icon>https://raw.githubusercontent.com/avalanche208/weevilcitycruisers/main/site/assets/club-logo.jpg</Icon>
 <ExtraParams>--security-opt=no-new-privileges:true</ExtraParams>
 <Config Name="Web port" Target="80" Default="8080" Mode="tcp" Description="Website HTTP port" Type="Port" Display="always" Required="true" Mask="false">8080</Config>
 <Config Name="Club data" Target="/data" Default="/mnt/user/appdata/weevil-city-cruisers" Mode="rw" Description="Persistent data. Add pictures under car_show_pictures/YYYY." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/weevil-city-cruisers</Config>
