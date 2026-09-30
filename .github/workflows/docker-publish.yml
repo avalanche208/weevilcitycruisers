@@ -22,7 +22,7 @@ jobs:
       - name: Install browser test dependencies
         run: |
           npm install --no-save playwright
-          npx playwright install --with-deps chromium
+          npx playwright install --with-deps chromium webkit
       - name: Build and test nginx, mounted galleries, and mobile layout
         run: BROWSER_TEST=1 bash tests/container-smoke.sh
       - uses: actions/upload-artifact@v4
@@ -47,7 +47,7 @@ jobs:
           images: avalanche208/weevilcitycruisers
           tags: |
             type=raw,value=latest
-            type=raw,value=2026.9.30-1c
+            type=raw,value=2026.9.30-1d
             type=sha
             type=ref,event=tag
       - uses: docker/build-push-action@v6

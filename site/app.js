@@ -17,13 +17,13 @@ async function photos(year) {
 function makeAlbum(year) {
   const card = document.createElement('a'); card.className='album';card.href=`/car-shows/${year}/`;
   const cover = document.createElement('div'); cover.className='album-cover placeholder';
-  const image = document.createElement('img'); image.src='/assets/mustang-mach1-orange.png';image.alt='';image.loading='lazy';
+  const image = document.createElement('img'); image.src='/assets/mustang-mach1-orange-v1d.png';image.alt='';image.loading='lazy';
   const badge=document.createElement('span');badge.textContent=year;cover.append(image,badge);
   const info=document.createElement('div');info.className='album-info';
   const text=document.createElement('div');const title=document.createElement('h3');title.textContent=`${year} Car Show`;
   const count=document.createElement('p');count.textContent='View album';text.append(title,count);
-  const arrow=document.createElement('span');arrow.className='album-arrow';arrow.textContent='↗';info.append(text,arrow);card.append(cover,info);
-  photos(year).then(items=>{count.textContent=items.length ? `${items.length} photos · View album` : 'Photos coming soon';if(items.length){image.src=photoURL(year,items[0].name);cover.classList.remove('placeholder');image.onerror=()=>{image.src='/assets/mustang-mach1-orange.png';image.onerror=null;cover.classList.add('placeholder');};}}).catch(()=>{count.textContent='Album temporarily unavailable';});
+  const arrow=document.createElement('span');arrow.className='album-arrow';arrow.textContent='↗︎';info.append(text,arrow);card.append(cover,info);
+  photos(year).then(items=>{count.textContent=items.length ? `${items.length} photos · View album` : 'Photos coming soon';if(items.length){image.src=photoURL(year,items[0].name);cover.classList.remove('placeholder');image.onerror=()=>{image.src='/assets/mustang-mach1-orange-v1d.png';image.onerror=null;cover.classList.add('placeholder');};}}).catch(()=>{count.textContent='Album temporarily unavailable';});
   return card;
 }
 async function loadAlbums() {
