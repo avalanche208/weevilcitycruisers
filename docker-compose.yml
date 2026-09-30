@@ -1,0 +1,12 @@
+services:
+  weevil-city-cruisers:
+    image: avalanche208/weevilcitycruisers:latest
+    build: .
+    container_name: weevil-city-cruisers
+    ports:
+      - "8080:80"
+    volumes:
+      - /mnt/user/appdata/weevil-city-cruisers:/data
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Container version="2">
+<Name>Weevil-City-Cruisers</Name>
+<Repository>avalanche208/weevilcitycruisers:latest</Repository>
+<Registry>https://hub.docker.com/r/avalanche208/weevilcitycruisers</Registry>
+<Network>bridge</Network><Privileged>false</Privileged><Shell>sh</Shell>
+<Support>https://github.com/avalanche208/weevilcitycruisers/issues</Support>
+<Project>https://github.com/avalanche208/weevilcitycruisers</Project>
+<Overview>Lightweight nginx car club website. Place photos in /data/car_show_pictures/YYYY. New year folders appear automatically without rebuilding or restarting.</Overview>
+<Category>Web: Other:</Category><WebUI>http://[IP]:[PORT:80]/</WebUI>
+<Icon>https://raw.githubusercontent.com/avalanche208/weevilcitycruisers/main/site/assets/unraid-icon.png</Icon>
+<ExtraParams>--security-opt=no-new-privileges:true</ExtraParams>
+<Config Name="Web port" Target="80" Default="8080" Mode="tcp" Description="Website HTTP port" Type="Port" Display="always" Required="true" Mask="false">8080</Config>
+<Config Name="Club data" Target="/data" Default="/mnt/user/appdata/weevil-city-cruisers" Mode="rw" Description="Persistent data. Add pictures under car_show_pictures/YYYY." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/weevil-city-cruisers</Config>
+</Container>
