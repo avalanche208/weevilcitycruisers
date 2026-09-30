@@ -1,0 +1,9 @@
+# Archived website recovery
+
+Retrieved September 30, 2026 from Archive.org. Historical text, not confirmation of current officers, locations, or schedules.
+
+About Us - Weevil City Cruisers Come to our cruise-in the first Saturday of every month at Milky Moos in downtown Enterprise! Weevil City Cruisers Home Upcoming Events Car Show Pictures Car Show Pictures 2022 Car Show Pictures 2023 Car Show Pictures 2024 About Us The Weevil City Cruisers was formed in 1996 by a local group of car enthusiasts to enjoy each others love of cars and trucks both old and new. The club has always been civic minded and supports several local charities to include The Brown Bag Program, The Children's Hospital, The Brendan Franco Foundation, The Wounded Warrior Program, and DHR children at Xmas to name a few. The Cruisers have an annual car show in the spring at Johnny Henderson Park. They also have monthly cruise ins at Milky Moos in Downtown Enterprise on the first Saturday of each month. Their monthly meetings are at Cafe Roma at 6 pm to eat and 7pm to meet on the first Monday of each month. Anyone and everyone is invited to the meetings and encouraged to participate. You do not have to have an old car to be a member of the club. You can have a new one or no car at all. We welcome everyone that has an interest in car and trucks in general. The club has other functions year round to include mystery cruises and an annual Christmas party pot luck and dirty Santa. President: Todd Ayer Vice President: Steve Nagy Secretary: Geoff Whittington Treasurer: Juleigh Ayer Proudly powered by Weebly
+
+Gallery references: 2022: 140; 2023: 196; 2024: 119. No corresponding gallery image URLs appeared in Archive.org image captures.
+
+Facebook link recovered directly from the archived HTML: https://www.facebook.com/WeevilCityCruisers

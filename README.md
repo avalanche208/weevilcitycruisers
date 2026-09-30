@@ -110,4 +110,4 @@ Reference snapshots:
 - https://web.archive.org/web/20250301000000/https://www.weevilcitycruisers.com/car-show-pictures-2023.html
 - https://web.archive.org/web/20250301000000/https://www.weevilcitycruisers.com/car-show-pictures-2024.html
 
-Raw recovered HTML and image reference manifests are in `research/` and excluded from the Docker image. The new classic car illustration is an original SVG, not a club photograph.
+The recovered historical text and image reference manifests are in `research/` and excluded from the Docker image. The new classic car illustration is an original SVG, not a club photograph.
