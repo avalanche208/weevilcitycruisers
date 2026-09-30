@@ -1,6 +1,6 @@
 # Weevil City Cruisers
 
-Lightweight nginx website for the Weevil City Cruisers car club in Enterprise, Alabama. Static HTML, CSS, JavaScript, and nginx's JSON directory index; no database, Node server, Python server, background scanner, or scheduled indexing process. Official `nginx:stable-alpine` base. HTTP port 80.
+Lightweight nginx website for the Weevil City Cruisers car club in Enterprise, Alabama. Static HTML, CSS, JavaScript, and nginx's JSON directory index; no database, Node server, Python server, background scanner, or scheduled indexing process. Official `nginx:stable-alpine` base with one nginx worker to keep resource use small. HTTP port 80.
 
 Source repository: https://github.com/avalanche208/weevilcitycruisers. Docker image target: `avalanche208/weevilcitycruisers:latest`. Check the Actions result and Docker Hub tags before deploying. The container serves HTTP only; your external proxy handles the certificate.
 
