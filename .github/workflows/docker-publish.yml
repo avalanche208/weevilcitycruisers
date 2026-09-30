@@ -47,7 +47,7 @@ jobs:
           images: avalanche208/weevilcitycruisers
           tags: |
             type=raw,value=latest
-            type=raw,value=2026.9.30-1b
+            type=raw,value=2026.9.30-1c
             type=sha
             type=ref,event=tag
       - uses: docker/build-push-action@v6

@@ -81,7 +81,7 @@ Configure GitHub Actions secrets on this new repository:
 
 Secrets on existing repositories do not automatically carry over. An organization-level secret must explicitly include the new repository if used instead.
 
-The workflow runs container smoke tests before publishing `linux/amd64` and `linux/arm64` images. It publishes on pushes to `main`, `v*` tags, manual runs, and weekly Sunday rebuilds at 08:23 UTC to refresh the nginx base. Tags include `latest`, `2026.9.30-1b`, and a commit SHA tag. Increment the app version in the footer and workflow when changing the website. Change tags if maintaining multiple release lines.
+The workflow runs container smoke tests before publishing `linux/amd64` and `linux/arm64` images. It publishes on pushes to `main`, `v*` tags, manual runs, and weekly Sunday rebuilds at 08:23 UTC to refresh the nginx base. Tags include `latest`, `2026.9.30-1c`, and a commit SHA tag. Increment the app version in the footer and workflow when changing the website. Change tags if maintaining multiple release lines.
 
 Before deployment, verify the first workflow passes and the image exists on Docker Hub. The workflow includes tests for nginx configuration, initial year creation, deep links, filenames with spaces and punctuation, live additions and deletions, uppercase extensions, and blocking nonimage files.
 

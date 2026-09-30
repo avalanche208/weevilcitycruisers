@@ -6,4 +6,4 @@ header .club-brand img{width:100px;height:auto;display:block;border-radius:4px}
 .hero-art img{position:relative;z-index:1;width:118%;height:auto;transform:translateX(-8px)}
 .art-caption{z-index:2}
 .album-cover.placeholder img{opacity:1;width:92%;height:auto}
-@media(max-width:800px){header .club-brand img{width:68px;height:auto}.hero-art img{width:112%;height:auto;max-width:112%;transform:none}.hero-art::before{width:68%}}
+@media(max-width:800px){header .club-brand img{width:68px;height:auto}.hero-art img{width:100%;height:auto;max-width:100%;transform:none}.hero-art::before{width:68%}}
