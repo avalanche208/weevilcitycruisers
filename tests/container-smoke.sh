@@ -4,7 +4,7 @@ cd "$(dirname "$0")/.."
 data_dir=$(mktemp -d)
 chmod 755 "$data_dir"
 container_name="wcc-test-${RANDOM}"
-trap 'docker rm -f "$container_name" >/dev/null 2>&1 || true; rm -rf "$data_dir"' EXIT
+trap 'docker logs "$container_name" 2>&1 | tail -60; docker exec "$container_name" chmod -R a+rwX /data >/dev/null 2>&1 || true; docker rm -f "$container_name" >/dev/null 2>&1 || true; rm -rf "$data_dir"' EXIT
 mkdir -p "$data_dir/car_show_pictures/2022"
 python3 - "$data_dir/car_show_pictures/2022/a space & quote.jpg" <<'PYIMAGE'
 import struct, sys, zlib

@@ -44,12 +44,12 @@ def main():
                     try:
                         subprocess.run([
                             'vipsthumbnail', f'/proc/self/fd/{original.fileno()}',
-                            '--size', '720x480', '--no-upsize',
+                            '--size', '720x480>',
                             '--output', temporary + '[Q=80,strip]',
                             '--vips-concurrency=1', '--vips-cache-max=0',
                         ], pass_fds=(original.fileno(),), check=True, timeout=60,
                             env={**os.environ, 'VIPS_CONCURRENCY': '1', 'VIPS_DISC_THRESHOLD': '32m'},
-                            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                            stdout=subprocess.DEVNULL)
                         os.chmod(temporary, 0o644)
                         os.replace(temporary, target)
                     finally:
