@@ -39,6 +39,8 @@ curl -fsS "$base/thumbnails/2022/a%20space%20%26%20quote.jpg" > "$data_dir/thumb
 cmp "$data_dir/thumb-test" "$data_dir/thumb-again"
 test "$cache_before" = "$(find "$data_dir/thumbnails" -name '*.jpg' -printf '%f %T@')"
 docker restart "$container_name"
+port=$(docker port "$container_name" 80/tcp | sed 's/.*://')
+base="http://127.0.0.1:$port"
 for attempt in {1..30}; do curl -fsS "$base/healthz" && break || sleep 1; done
 curl -fsS "$base/thumbnails/2022/a%20space%20%26%20quote.jpg" > "$data_dir/thumb-again"
 cmp "$data_dir/thumb-test" "$data_dir/thumb-again"
@@ -48,6 +50,14 @@ touch -m -d '+2 seconds' "$data_dir/car_show_pictures/2022/a space & quote.jpg"
 curl -fsS "$base/thumbnails/2022/a%20space%20%26%20quote.jpg" > /dev/null
 test "$(find "$data_dir/thumbnails" -name '*.jpg' | wc -l)" = 2
 cmp "$data_dir/original-test" "$data_dir/car_show_pictures/2022/a space & quote.jpg"
+# Exercise each supported thumbnail format, including AVIF.
+for format in jpg png webp gif avif; do
+ docker exec "$container_name" vips copy '/data/car_show_pictures/2022/a space & quote.jpg' "/data/car_show_pictures/2022/format.$format"
+ curl -fsS "$base/thumbnails/2022/format.$format" > /dev/null
+ docker exec "$container_name" rm "/data/car_show_pictures/2022/format.$format"
+ test "$(curl -s -o /dev/null -w '%{http_code}' "$base/thumbnails/2022/format.$format")" = 404
+done
+docker stats --no-stream --format 'Idle container memory: {{.MemUsage}}' "$container_name"
 # No Python/image processor remains in memory between requests.
 ! docker exec "$container_name" ps -o comm | grep -E '^(python3|vipsthumbnail)$'
 curl -fsS "$base/car-shows/2022/" | grep -F 'gallery-page'
