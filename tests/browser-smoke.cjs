@@ -28,7 +28,12 @@ const assert = require('node:assert/strict');
   }
   await page.goto(base+'/car-shows/2022/'); await page.locator('.photo-tile').waitFor();
   assert.equal(await page.locator('.photo-tile').count(), 1); // private.txt is filtered
+  assert((await page.locator('.photo-tile img').getAttribute('src')).startsWith('/thumbnails/2022/'));
+  await page.locator('.photo-tile img').evaluate(img=>img.decode());
   await page.locator('.photo-tile').click(); assert(await page.locator('dialog').isVisible());
+  assert((await page.locator('#viewer-image').getAttribute('src')).startsWith('/photos/2022/'));
+  assert((await page.locator('#original-photo').getAttribute('href')).startsWith('/photos/2022/'));
+  await page.locator('#viewer-image').evaluate(img=>img.decode());
   await page.keyboard.press('ArrowRight'); await page.keyboard.press('Escape');
   assert.equal(await page.locator('dialog').isVisible(), false);
   await page.goto(base+'/car-shows/2026/');

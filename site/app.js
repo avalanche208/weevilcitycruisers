@@ -4,6 +4,7 @@ const defaults = ['2026','2025','2024','2023','2022'];
 const supportedImage = /\.(jpe?g|png|webp|gif|avif)$/i;
 const safeFile = name => typeof name === 'string' && !name.startsWith('.') && !/[\/\\\u0000-\u001f]/.test(name) && supportedImage.test(name);
 const photoURL = (year,name) => `/photos/${year}/${encodeURIComponent(name)}`;
+const thumbnailURL = (year,name) => `/thumbnails/${year}/${encodeURIComponent(name)}`;
 async function listing(path) {
   const response = await fetch(path,{cache:'no-store'});
   if (!response.ok) throw new Error(`Unable to load gallery (${response.status}).`);
@@ -23,7 +24,7 @@ function makeAlbum(year) {
   const text=document.createElement('div');const title=document.createElement('h3');title.textContent=`${year} Car Show`;
   const count=document.createElement('p');count.textContent='View album';text.append(title,count);
   const arrow=document.createElement('span');arrow.className='album-arrow';arrow.textContent='↗︎';info.append(text,arrow);card.append(cover,info);
-  photos(year).then(items=>{count.textContent=items.length ? `${items.length} photos · View album` : 'Photos coming soon';if(items.length){image.src=photoURL(year,items[0].name);cover.classList.remove('placeholder');image.onerror=()=>{image.src='/assets/mustang-mach1-orange-v1d.png';image.onerror=null;cover.classList.add('placeholder');};}}).catch(()=>{count.textContent='Album temporarily unavailable';});
+  photos(year).then(items=>{count.textContent=items.length ? `${items.length} photos · View album` : 'Photos coming soon';if(items.length){image.src=thumbnailURL(year,items[0].name);cover.classList.remove('placeholder');image.onerror=()=>{image.src='/assets/mustang-mach1-orange-v1d.png';image.onerror=null;cover.classList.add('placeholder');};}}).catch(()=>{count.textContent='Album temporarily unavailable';});
   return card;
 }
 async function loadAlbums() {
@@ -34,7 +35,7 @@ async function loadAlbums() {
   $('albums').replaceChildren(...years.map(makeAlbum));
 }
 let items=[],visible=0,current=0,activeYear='';
-function showMore(){const next=items.slice(visible,visible+48);for(const [offset,item] of next.entries()) {const index=visible+offset;const tile=document.createElement('button');tile.className='photo-tile';tile.setAttribute('aria-label',`Open photo ${index+1} from the ${activeYear} car show`);const img=document.createElement('img');img.src=photoURL(activeYear,item.name);img.alt=`${activeYear} car show photo ${index+1}`;img.loading='lazy';img.decoding='async';tile.append(img);tile.addEventListener('click',()=>openPhoto(index));$('photo-grid').append(tile);}visible+=next.length;$('load-more').hidden=visible>=items.length;}
+function showMore(){const next=items.slice(visible,visible+48);for(const [offset,item] of next.entries()) {const index=visible+offset;const tile=document.createElement('button');tile.className='photo-tile';tile.setAttribute('aria-label',`Open photo ${index+1} from the ${activeYear} car show`);const img=document.createElement('img');img.src=thumbnailURL(activeYear,item.name);img.alt=`${activeYear} car show photo ${index+1}`;img.loading='lazy';img.decoding='async';tile.append(img);tile.addEventListener('click',()=>openPhoto(index));$('photo-grid').append(tile);}visible+=next.length;$('load-more').hidden=visible>=items.length;}
 function setPhoto(index){current=(index+items.length)%items.length;const url=photoURL(activeYear,items[current].name);$('viewer-image').src=url;$('viewer-image').alt=`${activeYear} car show photo ${current+1}`;$('original-photo').href=url;$('photo-counter').textContent=`${current+1} / ${items.length}`;}
 function openPhoto(index){setPhoto(index);$('lightbox').showModal();}
 async function loadGallery(year){activeYear=year;$('main').hidden=true;$('gallery-page').hidden=false;$('gallery-title').textContent=`${year} Car Show`;document.title=`${year} Car Show | Weevil City Cruisers`;$('photo-status').textContent='Loading photos…';$('retry-photos').hidden=true;$('load-more').hidden=true;$('photo-grid').replaceChildren();visible=0;

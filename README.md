@@ -1,6 +1,6 @@
 # Weevil City Cruisers
 
-Lightweight nginx website for the Weevil City Cruisers car club in Enterprise, Alabama. Static HTML, CSS, JavaScript, and nginx's JSON directory index; no database, Node server, Python server, background scanner, or scheduled indexing process. Official `nginx:stable-alpine` base with one nginx worker to keep resource use small. HTTP port 80.
+Lightweight nginx website for the Weevil City Cruisers car club in Enterprise, Alabama. Static HTML, CSS, JavaScript, and nginx's JSON directory index; no database, Node server, background scanner, or scheduled indexing process. Two small FastCGI workers launch an on-demand thumbnail script using libvips. Official `nginx:stable-alpine` base with one nginx worker to keep resource use small. HTTP port 80.
 
 Source repository: https://github.com/avalanche208/weevilcitycruisers. Docker image target: `avalanche208/weevilcitycruisers:latest`. Check the Actions result and Docker Hub tags before deploying. The container serves HTTP only; your external proxy handles the certificate.
 
@@ -42,7 +42,9 @@ To add a future album, create `car_show_pictures/2027/` and add images. Its albu
 
 Supported: JPG, JPEG, PNG, WebP, GIF, AVIF, including uppercase extensions, spaces, and Unicode filenames. Convert HEIC files to JPEG first. Files must be directly inside the year folder; nested folders are intentionally ignored. Four-digit year folders are discovered automatically. Files are sorted naturally by filename. Hidden files are excluded from the gallery; only the listed image formats are served through the photo route. Other `/data` files are not publicly served. JSON album listings expose filenames inside the gallery folders, so use them only for public club photos.
 
-The browser loads 48 photo tiles at a time, with lazy image loading. The viewer supports previous/next buttons, left/right arrow keys, Escape, and opening the original image. For large collections, resize photos to about 2000–2500 pixels wide before copying them; this nginx-only design does not generate thumbnails or modify originals.
+The browser loads 48 photo tiles at a time, with lazy image loading. The viewer supports previous/next buttons, left/right arrow keys, Escape, and opening the original image. Album covers and gallery tiles request thumbnails bounded to 720 × 480 pixels without upscaling. The first request generates and saves a JPEG under `/data/thumbnails`; subsequent requests reuse it, including after container updates. Opening a photo in the viewer or selecting Open original fetches the full-size original. Originals are never modified.
+
+There are no scans, watchers, or scheduled jobs. Up to two thumbnails are processed concurrently, each with one libvips processing thread. Both Python and the image-processing subprocess exit after each request, releasing their memory. Only the small FastCGI launchers remain idle between requests. The first gallery visit can be slower while thumbnails are created. Replacing a photo invalidates its cached thumbnail using file size and modification time; deleting an original makes its thumbnail URL return 404. Old cache entries may be removed by stopping the container and deleting `/data/thumbnails` (they regenerate on demand). The container creates this cache directory owned by nginx; the mounted `/data` must be writable at startup. libvips uses disk-backed temporary storage for large images; actual peak RAM depends on the source image and decoder.
 
 Back up the host data folder separately. Replacing/updating the container does not remove mounted photographs. The only persistent runtime content is in `/data`.
 
@@ -81,7 +83,7 @@ Configure GitHub Actions secrets on this new repository:
 
 Secrets on existing repositories do not automatically carry over. An organization-level secret must explicitly include the new repository if used instead.
 
-The workflow runs container smoke tests before publishing `linux/amd64` and `linux/arm64` images. It publishes on pushes to `main`, `v*` tags, manual runs, and weekly Sunday rebuilds at 08:23 UTC to refresh the nginx base. Tags include `latest`, `2026.9.30-1d`, and a commit SHA tag. Increment the app version in the footer and workflow when changing the website. Change tags if maintaining multiple release lines.
+The workflow runs container smoke tests before publishing `linux/amd64` and `linux/arm64` images. It publishes on pushes to `main`, `v*` tags, manual runs, and weekly Sunday rebuilds at 08:23 UTC to refresh the nginx base. Tags include `latest`, `2026.10.16-1a`, and a commit SHA tag. Increment the app version in the footer and workflow when changing the website. Change tags if maintaining multiple release lines.
 
 Before deployment, verify the first workflow passes and the image exists on Docker Hub. The workflow includes tests for nginx configuration, initial year creation, deep links, filenames with spaces and punctuation, live additions and deletions, uppercase extensions, and blocking nonimage files.
 
