@@ -2,7 +2,7 @@ FROM nginx:stable-alpine
 LABEL org.opencontainers.image.title="Weevil City Cruisers" \
       org.opencontainers.image.description="Lightweight car club website with external year-based photo galleries" \
       org.opencontainers.image.source="https://github.com/avalanche208/weevilcitycruisers"
-RUN apk add --no-cache python3 vips-tools fcgiwrap spawn-fcgi
+RUN apk add --no-cache python3 vips-tools vips-heif fcgiwrap spawn-fcgi
 COPY scripts/thumbnail-server.py /opt/wcc/thumbnail-server.py
 COPY scripts/45-thumbnail-server.sh /docker-entrypoint.d/45-thumbnail-server.sh
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
